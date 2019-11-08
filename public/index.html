@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vision TIM</title>
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/4/cosmo/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="banner">
+      <div class="row">
+        <div class="col-9 discoverBtn"></div>
+        <div class="col-3 g5">
+          <div class="btnSpacer"></div>
+          <div class="btnUrl">
+            <button type="button" class="roundBtn" id="btnAnonymous">
+              DISCOVER VISION5 NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bannerLogged">
+      <div class="row">
+        <div class="col-9 discoverBtn"></div>
+        <div class="col-3 g5">
+          <div class="btnSpacer">
+            <div class="customer">
+              Welcome back <span class="promoCode">Valerio</span>
+            </div>
+            <div class="textPromo">
+              We got a special promo just for you!
+            </div>
+            <div class="textPromo">
+              Add the power of 5G to your current business plan and use the code
+              <span class="promoCode">VISION5G</span> at checkout to get 10% off
+              for the next 12 months.
+            </div>
+          </div>
+          <div class="btnUrl">
+            <button type="button" class="roundBtn" id="btnLogged">
+              DISCOVER VISION5 NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="configuration">
+      <div class="row">
+        <!-- CONFIGURATOR -->
+        <div class="col-8 planOptions">
+          <div class="col-12 ConfigTitle">
+            VISION5 FOR BUSINESS INCLUDED SERVICES
+          </div>
+          <div class="col-12">
+            <hr class="new" />
+          </div>
+          <div class="col-12 serviceDetail">
+            <img src="vision-email-icon.png" alt="email" />
+            <span class="iconService">Unlimited EMAIL and CHAT</span>
+          </div>
+          <div class="col-12 serviceSmallText">
+            Supported Protocols List: IMAP/IMAPs, POP3/POP3s, SMTP/SMTPs,
+            Outlook.com, AOL Mail, ZOHO Mail, Mail.com, GMX Email, iCloud Mail.
+          </div>
+          <div class="col-12">
+            <hr />
+          </div>
+          <div class="col-12 serviceDetail">
+            <img src="vision-phone-icon.png" alt="call" />
+            <span class="iconService"
+              >50 minutes of International calls & 50 SMS</span
+            >
+          </div>
+          <div class="col-12 serviceSmallText">
+            Supported Protocols List: IMAP/IMAPs, POP3/POP3s, SMTP/SMTPs,
+            Outlook.com, AOL Mail, ZOHO Mail, Mail.com, GMX Email, iCloud Mail.
+          </div>
+          <div class="col-12">
+            <hr />
+          </div>
+          <div class="col-12 serviceDetail">
+            <img src="vision-db-icon.png" alt="call" />
+            <span class="iconService">10 GB of Free Cloud Storage</span>
+          </div>
+          <div class="col-12 serviceSmallText">
+            Supported Protocols List: IMAP/IMAPs, POP3/POP3s, SMTP/SMTPs,
+            Outlook.com, AOL Mail, ZOHO Mail, Mail.com, GMX Email, iCloud Mail.
+          </div>
+          <div class="col-12">
+            <hr />
+          </div>
+          <div class="col-12 serviceDetail">
+            <img src="vision-firewall-icon.png" alt="call" />
+            <span class="iconService">VISION SMART SAFE</span>
+          </div>
+          <div class="col-12 serviceSmallText">
+            Supported Protocols List: IMAP/IMAPs, POP3/POP3s, SMTP/SMTPs,
+            Outlook.com, AOL Mail, ZOHO Mail, Mail.com, GMX Email, iCloud Mail.
+          </div>
+          <div class="col-12">
+            <hr />
+          </div>
+          <div class="col-12 ConfigTitle">
+            VISION5 SERVICE ACTIVATION
+          </div>
+          <div class="col-12">
+            <hr class="new" />
+          </div>
+          <!-- CONFIG -->
+          <div class="col-12 serviceDetail">
+            <span class="textDescriptionService">
+              Select the quantity of SIMs you would like to purchase
+            </span>
+          </div>
+          <div class="col-12">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              id="removeService"
+            >
+              -
+            </button>
+            <button
+              type="button"
+              class="btn btn-default btn-lg"
+              id="serviceAmount"
+            >
+              1
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              id="addService"
+            >
+              +
+            </button>
+          </div>
+
+          <div class="spacer"></div>
+
+          <!-- NEW SIM LAYOUT -->
+          <div class="col-12 simLayout">
+            <div class="row">
+              <div class="col-4 simSelection">
+                <div class="col-12 simNumber">
+                  SIM NUMBER 1
+                </div>
+                <hr />
+                <!-- Sim selection -->
+                <div class="row">
+                  <div class="col-2">
+                    <img src="vision-sim-icon.png" alt="sim" />
+                  </div>
+                  <div class="col-10">
+                    <select class="form-control" id="selectNewSimOperator">
+                      <option>Move to Vision</option>
+                      <option>Keep your number</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- End of sim selection -->
+              </div>
+              <div class="col-8 customerData">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="companyId">Company ID</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="companyId"
+                        placeholder="ES 1000000000"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="companyName">Company Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="companyName"
+                        placeholder="Vision Supremo"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="simFirstName">SIM owner first name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="simFirstName"
+                        placeholder="Mario"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="simLastName">SIM owner last name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="simLastName"
+                        placeholder="Rossi"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="phoneNumber">Phone number</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phoneNumber"
+                        placeholder="063648718267"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="emailCustomer">Email address</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="emailCustomer"
+                        placeholder="m.rossi@email.com"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <!-- NEW SIM LAYOUT-->
+
+          <!-- ENF OF CONFIG -->
+        </div>
+        <!-- RECAP -->
+        <div class="col-4 recap">
+          <div class="row">
+            <div class="col-12 textOne">
+              You are purchasing:
+            </div>
+            <div class="col-12 textTwo">
+              VISION5 for Business - 5G WiFi High Speed Network
+            </div>
+
+            <div class="col-8 textThree">
+              Monthly rate:
+            </div>
+            <div class="col-4 prices" id="monthlyFee">
+              € 15.00
+            </div>
+            <div class="col-12">
+              <hr class="new" />
+            </div>
+            <div class="col-8 textFour">
+              Activation cost:
+            </div>
+            <div class="col-4 prices2" id="fixedPrice">
+              € 10.00
+            </div>
+            <div class="col-12">
+              <hr class="new" />
+            </div>
+            <div class="col-8 textFour">
+              Total cost:
+            </div>
+            <div class="col-4 prices2" id="amount">
+              € 25.00
+            </div>
+            <div class="col-12 vat">
+              Prices excluding VAT
+            </div>
+            <div class="col-12">
+              <hr />
+            </div>
+            <div class="col-12 textOne">
+              You have selected:
+            </div>
+            <!-- CART RECAP -->
+            <div class="col-12 cartRecapSIMContainer">
+              <div class="col-12 simVision">
+                <div class="col-12 textTwo">
+                  SIM NUMBER 1
+                </div>
+                <div class="col-12 textTwo">
+                  Option: <span class="prices" id="desc">Move to Vision</span>
+                </div>
+                <div class="col-12">
+                  <hr class="new" />
+                </div>
+              </div>
+            </div>
+
+            <!-- END OF CART RECAP -->
+            <div class="col-12 btnAddtoCart">
+              <button type="button" class="roundBtn">
+                ADD VISION5 TO CART
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <button
+      type="button"
+      id="modalbutton"
+      class="btn btn-success btn-lg"
+      data-toggle="modal"
+      data-target="#myModal"
+    >
+      Connect to Vision
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <h4 class="modal-title" id="myModalLabel">Casa del Libro ChatBot</h4> -->
+            <img src="vision_rld_logo.png" alt="Vision" />
+          </div>
+          <div class="modal-body">
+            <!-- Alert -->
+            <div
+              class="alert alert-dismissible alert-success"
+              id="loginUiFeedback"
+            >
+              <button type="button" class="close" data-dismiss="alert">
+                &times;
+              </button>
+              <p class="mb-0" id="logMessageResponse"></p>
+            </div>
+            <!-- Alert -->
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input
+                type="email"
+                class="form-control"
+                id="username"
+                value=""
+                placeholder="m.rossi@gmail.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="customerText">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                value=""
+                placeholder="******"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-success" id="sendLogin">
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END OF MODAL -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

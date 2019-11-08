@@ -1,0 +1,203 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+hr.new {
+  border-top: 1px dashed #428bca;
+}
+
+.banner {
+  min-width: 100%;
+  min-height: 525px;
+  background-color: #428bca;
+}
+
+.bannerLogged {
+  min-width: 100%;
+  min-height: 525px;
+  background-color: #428bca;
+}
+
+.g5 {
+  background-image: url("b5g-anonymous_03.png");
+  background-repeat: no-repeat;
+  min-height: 525px;
+}
+
+.discoverBtn {
+  background-image: url("b5g-anonymous_01.png");
+  background-repeat: no-repeat;
+  min-height: 525px;
+}
+
+.btnSpacer {
+  min-height: 400px;
+}
+
+.roundBtn {
+  background-color: #428bca;
+  border: 2px solid white;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  border-radius: 12px;
+}
+
+.roundBtn:hover {
+  background-color: white;
+  border: 2px solid white;
+  color: #428bca;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  border-radius: 12px;
+}
+
+.customer {
+  font-size: 40px;
+  padding-top: 20px;
+  padding-left: 10px;
+  color: white;
+}
+
+.textPromo {
+  font-size: 25px;
+  padding-top: 20px;
+  padding-left: 10px;
+  color: white;
+}
+
+.promoCode {
+  color: #57ffff;
+}
+
+.recap {
+  -webkit-box-shadow: -2px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: -2px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  font-size: 20px;
+}
+
+.planOptions {
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.textOne {
+  font-size: 20px;
+}
+
+.textTwo {
+  font-size: 20px;
+  color: #428bca;
+}
+
+.textThree {
+  padding-top: 20px;
+  font-size: 20px;
+  color: #428bca;
+}
+
+.prices {
+  color: #ff6666;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.textFour {
+  font-size: 20px;
+  color: #428bca;
+}
+
+.prices2 {
+  color: #ff6666;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.vat {
+  color: #ff6666;
+  font-size: 12px;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.btnAddtoCart {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.ConfigTitle {
+  font-size: 20px;
+  color: #428bca;
+  font-weight: bold;
+}
+
+.serviceDetail {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.serviceSmallText {
+  font-size: 15px;
+  padding-left: 80px;
+}
+
+.iconService {
+  padding-left: 30px;
+  font-size: 20px;
+  color: #428bca;
+}
+
+.textDescriptionService {
+  font-size: 20px;
+  color: #428bca;
+  padding-bottom: 20px;
+}
+
+.spacer {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.containerSim {
+  background-color: #fafafa;
+}
+
+.simNumber {
+}
+
+.simLayout {
+  background-color: #fafafa;
+  padding-bottom: 20px;
+}
+
+#modalbutton {
+  float: right;
+  background-color: #428bca;
+  -webkit-box-shadow: -7px 6px 2px -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -7px 6px 2px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: -7px 6px 2px -2px rgba(0, 0, 0, 0.2);
+
+  position: fixed;
+  margin-top: 100%;
+  height: 80px;
+  width: 300px;
+  bottom: 0;
+  z-index: 4;
+}
+
+.btn-success {
+  background-color: #428bca !important;
+}
