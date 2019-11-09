@@ -46,8 +46,8 @@ class OCCS {
         .then(data => {
           console.log(data.access_token);
           this.token = data.access_token;
+          // get current profile
           this.getCurrentProfile(res);
-          // res.status(200).send({ message: data.access_token });
         })
         .catch(error => {
           res
@@ -97,8 +97,6 @@ class OCCS {
           res
             .status(200)
             .send({ cusData: this.customerData, token: this.token });
-          // getCurrentOrder to retrieve order data
-          // this.getOrder(res);
         })
         .catch(error => {
           res

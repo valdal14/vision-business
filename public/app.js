@@ -6,18 +6,34 @@ var totalFee = monthlyFee + activationFee;
 // Hide UI Elements
 $("#loginUiFeedback").hide();
 $(".bannerLogged").hide();
+$(".banner").hide();
+$(".bannerLoading").hide();
+// disable add to cart button
+document.querySelector("#btnAddSimToCart").disabled = true;
 
 function checkPreviousSession() {
   if (
     localStorage.getItem("VISION5") !== null &&
-    localStorage.getItem("VISION5") !== null
+    localStorage.getItem("VISION5") !== undefined
   ) {
     // hide the modal login button
     $("#modalbutton").hide();
     // parse the data
     var data = JSON.parse(localStorage.getItem("VISION5"));
+    // change banner graphic
+    document.querySelector(".bannersContainer").style.backgroundImage =
+      "url('businessmobiles-logged.png')";
     // add customer data to the UI
     addLoggedUserToSIM(data);
+    // show logged banner
+    $(".bannerLogged").show();
+    // enable add to cart button
+    document.querySelector("#btnAddSimToCart").disabled = false;
+  } else {
+    $(".banner").show();
+    // change banner graphic
+    document.querySelector(".bannersContainer").style.backgroundImage =
+      "url('businessmobiles.png')";
   }
 }
 
@@ -30,6 +46,7 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
   e.preventDefault();
   var username = document.querySelector("#username").value;
   var password = document.querySelector("#password").value;
+  $(".bannerLoading").show();
 
   fetch("/login", {
     method: "POST",
@@ -49,11 +66,15 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
       if (data.token === undefined && data.token === null) {
         loginUIMessage("Error: Impossible to find valid data, try again!");
         $("#loginUiFeedback").show();
+        // change banner graphic
+        document.querySelector(".bannersContainer").style.backgroundImage =
+          "url('businessmobiles.png')";
       } else {
         console.log(data.cusData);
         console.log(data.token);
-        // document.querySelector("#portofino").style.display = "none";
-        // document.querySelector("#gt4lusso").style.display = "none";
+        // change banner graphic
+        document.querySelector(".bannersContainer").style.backgroundImage =
+          "url('businessmobiles-logged.png')";
         // perform the getCurrentProfile API request
         loginUIMessage("Login completed successfully");
         $("#loginUiFeedback").show();
@@ -61,6 +82,12 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
         $("#modalbutton").hide();
         addLoggedUserToSIM(data.cusData);
         saveUserToLocalStorage(data.cusData, data.token);
+        // enable add to cart button
+        document.querySelector("#btnAddSimToCart").disabled = false;
+        // hide banners
+        $(".bannerLogged").show();
+        $(".banner").hide();
+        $(".bannerLoading").hide();
       }
     })
     .catch(function(error) {
@@ -81,6 +108,7 @@ function addLoggedUserToSIM(customerData) {
   document.querySelector("#simLastName").value = customerData.lastName;
   document.querySelector("#phoneNumber").value = customerData.phoneNumber;
   document.querySelector("#emailCustomer").value = customerData.email;
+  document.querySelector("#bannerUsername").innerHTML = customerData.firstName;
 }
 
 /**

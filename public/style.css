@@ -1,33 +1,31 @@
-body {
-  font-family: "Roboto", sans-serif;
-}
-
 hr.new {
   border-top: 1px dashed #428bca;
 }
 
+img {
+  max-width: 100%;
+}
+
 .banner {
   min-width: 100%;
-  min-height: 525px;
-  background-color: #428bca;
+  min-height: 712px;
 }
 
 .bannerLogged {
   min-width: 100%;
-  min-height: 525px;
-  background-color: #428bca;
+  min-height: 712px;
+  color: #428bca;
 }
 
-.g5 {
-  background-image: url("b5g-anonymous_03.png");
+.bannersContainer {
+  background-image: url("businessmobiles.png");
   background-repeat: no-repeat;
-  min-height: 525px;
+  min-height: 712px;
 }
 
 .discoverBtn {
-  background-image: url("b5g-anonymous_01.png");
   background-repeat: no-repeat;
-  min-height: 525px;
+  min-height: 712px;
 }
 
 .btnSpacer {
@@ -64,18 +62,17 @@ hr.new {
   font-size: 40px;
   padding-top: 20px;
   padding-left: 10px;
-  color: white;
 }
 
 .textPromo {
   font-size: 25px;
   padding-top: 20px;
   padding-left: 10px;
-  color: white;
+  padding-right: 20px;
 }
 
 .promoCode {
-  color: #57ffff;
+  color: #ff6666;
 }
 
 .recap {
@@ -200,4 +197,19 @@ hr.new {
 
 .btn-success {
   background-color: #428bca !important;
+}
+
+.bannerLoading {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.loader {
+  width: 3%;
+  height: 3%;
+}
+
+#myModal {
+  top: 150px !important;
 }
