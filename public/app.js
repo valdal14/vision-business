@@ -98,6 +98,61 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
 });
 
 /**
+ * Add to cart
+ */
+document
+  .querySelector("#btnAddSimToCart")
+  .addEventListener("click", function(e) {
+    e.preventDefault();
+    $(".bannerLoading").show();
+    fetch("/createOrder", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify({
+        //data to send
+        quantity: quantity
+      })
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        console.log(data.message.id);
+        if (data.message.id !== null && data.message.id !== undefined) {
+          $(".bannerLoading").hide();
+          // open the new modal
+          $("#myModalAddToCart").modal("show");
+          // add message to the UI
+          loginUIAddToCartMessages(
+            "Order created with id: " +
+              data.message.id +
+              " You would be redirected for the checkout in just few seconds"
+          );
+          //redirect the user
+          setTimeout(function(e) {
+            window.location.href =
+              "https://ccstore-z5da.oracleoutsourcing.com/cart";
+          }, 10000);
+        } else {
+          // open the new modal
+          $("#myModalAddToCart").modal("show");
+          loginUIAddToCartMessages(
+            "Error : We could not create your order, please try again!!!"
+          );
+          $(".bannerLoading").hide();
+        }
+      })
+      .catch(function(error) {
+        // open the new modal
+        $("#myModalAddToCart").modal("show");
+        loginUIAddToCartMessages("Error: " + error);
+        $(".bannerLoading").hide();
+      });
+  });
+
+/**
  * Add the logged user info to the UI
  * @param {dictionary} customerData
  */
@@ -164,6 +219,50 @@ function loginUIMessage(message) {
     document.querySelector("#logMessageResponse").innerHTML = message;
     // dismiss the modal
     $("#myModal").modal("hide");
+  }
+}
+
+/**
+ * Log Login responses to the UI
+ * @param {string} message
+ */
+function loginUIAddToCartMessages(message) {
+  if (message.includes("Error")) {
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.remove("alert");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.remove("alert-dismissible");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.remove("alert-success");
+    document.querySelector("#loginUiFeedbackAddToCart").classList.add("alert");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.add("alert-dismissible");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.add("alert-danger");
+    document.querySelector("#loginUiFeedbackAddToCart").innerHTML = message;
+  } else {
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.remove("alert");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.remove("alert-dismissible");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.remove("alert-danger");
+    document.querySelector("#loginUiFeedbackAddToCart").classList.add("alert");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.add("alert-dismissible");
+    document
+      .querySelector("#loginUiFeedbackAddToCart")
+      .classList.add("alert-success");
+    document.querySelector("#loginUiFeedbackAddToCart").innerHTML = message;
   }
 }
 

@@ -5,10 +5,12 @@ class OCCS {
   constructor() {
     // token
     this.token = null;
-    // order info
-    this.orderId = null;
-    this.productId = null;
-    this.catRefId = null; // vision5 sku
+    // product info
+    //this.orderId = null;
+    this.productId = "iPhoneX"; // vision5
+    this.catRefId = "iphoneXsg256GB"; // vision5 sku
+    this.vision5Price = 999.0;
+    this.quantity = 1;
     // customer data
     this.companyId = null;
     this.companyName = null;
@@ -16,6 +18,14 @@ class OCCS {
     this.lastName = null;
     this.phoneNumber = null;
     this.email = null;
+    // customer address
+    this.country = null;
+    this.city = null;
+    this.address1 = null;
+    this.postalCode = null;
+    this.regionName = null;
+    this.state = null;
+    this.countryName = null;
     // customer data array
     this.customerData = {};
   }
@@ -44,7 +54,6 @@ class OCCS {
           return response.json();
         })
         .then(data => {
-          console.log(data.access_token);
           this.token = data.access_token;
           // get current profile
           this.getCurrentProfile(res);
@@ -79,13 +88,24 @@ class OCCS {
           return response.json();
         })
         .then(data => {
+          // customer profile id
+          this.profileId = data.id;
+          // customer data
           this.companyId = data.id;
           this.companyName = "Oracle";
           this.firstName = data.firstName;
           this.lastName = data.lastName;
           this.phoneNumber = data.shippingAddresses[0].phoneNumber;
           this.email = data.email;
-
+          // address
+          this.country = data.shippingAddresses[0].country;
+          this.city = data.shippingAddresses[0].city;
+          this.address1 = data.shippingAddresses[0].address1;
+          this.postalCode = data.shippingAddresses[0].postalCode;
+          this.regionName = data.shippingAddresses[0].regionName;
+          this.state = data.shippingAddresses[0].state;
+          this.countryName = data.shippingAddresses[0].countryName;
+          // customer data
           this.customerData = {
             companyId: this.companyId,
             companyName: this.companyName,
@@ -111,193 +131,104 @@ class OCCS {
   }
 
   /**
-   * Get current order
-   * @param {*} res
-   */
-  getOrder(res) {
-    try {
-      fetch(process.env.OCCSURL + process.env.ENDPOINTGETORDER, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.token
-        }
-      })
-        .then(response => {
-          if (response.status === 204) {
-            res.status(200).send({ message: response.status });
-          } else {
-            return response.json();
-          }
-        })
-        .then(data => {
-          if (data.orderId !== null && data.orderId !== undefined) {
-            // create the order
-            //this.createOrderHelper(productToAdd, res);
-            this.orderId = data.orderId;
-            res
-              .status(200)
-              .send({ message: [this.orderId, this.customerData] });
-          } else {
-            res.status(200).send({
-              message: "No valid orderId found"
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-          res.status(200).send({
-            message: "Error retrieving your order"
-          });
-        });
-    } catch (error) {
-      res.status(200).send({ message: "Cannot perform getOrder request" });
-    }
-  }
-
-  /**
-   * Create an order on OCCS
+   * Create a new Order on OCCS
    * @param {*} req
    * @param {*} res
    */
   createOrder(req, res) {
-    // first get the orderId
+    // get the request quantity
+    // to-do
     try {
-      // get the data from req
-      let products = req.body.products;
-      let cartSize = products.length;
-      let productToAdd = [];
-
-      for (let i = 0; i < cartSize; i++) {
-        productToAdd.push({
-          rawTotalPrice: products[i].price,
-          returnedQuantity: 0,
-          dynamicProperties: [],
-          shippingSurchargeValue: 0.0,
-          availabilityDate: null,
-          externalData: [],
-          discountAmount: 0.0,
-          preOrderQuantity: 0,
-          commerceItemId: "ci7001057",
-          price: products[i].price,
-          onSale: false,
-          stateDetailsAsUser:
-            "The item has been initialized within the shipping group",
-          commerceId: "ci7001057",
-          unitPrice: products[i].price,
-          amount: products[i].price,
-          quantity: 1,
-          productId: products[i].productId,
-          salePrice: 0.0,
-          detailedItemPriceInfo: [
-            {
-              discounted: false,
-              secondaryCurrencyTaxAmount: 0.0,
-              amount: products[i].price,
-              quantity: 1,
-              tax: 0.0,
-              orderDiscountShare: 0.0,
-              detailedUnitPrice: products[i].price,
-              currencyCode: "EUR"
-            }
-          ],
-          catRefId: products[i].sku,
-          discountInfo: [],
-          shopperInput: {},
-          backOrderQuantity: 0,
-          listPrice: products[i].price,
-          status: "INITIAL"
-        });
-      }
-
-      // retrieving the current cart == orderId
-      fetch(process.env.OCCSURL + process.env.ENDPOINTGETORDER, {
-        method: "GET",
+      let quantity = req.body.quantity;
+      this.quantity = quantity;
+      // create order
+      fetch(process.env.OCCSURL + process.env.ENDPOINTCREATEORDER, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + this.token
-        }
+        },
+        body: JSON.stringify({
+          op: "createOrder",
+          profileId: this.profileId,
+          shippingMethod: {
+            value: "hardgoodShippingGroup"
+          },
+          shoppingCart: {
+            items: [
+              {
+                rawTotalPrice: this.vision5Price,
+                returnedQuantity: 0,
+                dynamicProperties: [],
+                shippingSurchargeValue: 0.0,
+                availabilityDate: null,
+                externalData: [],
+                discountAmount: 0.0,
+                preOrderQuantity: 0,
+                price: this.vision5Price,
+                onSale: false,
+                stateDetailsAsUser:
+                  "The item has been initialized within the shipping group",
+                unitPrice: this.vision5Price,
+                amount: this.vision5Price * this.quantity,
+                quantity: this.quantity,
+                productId: this.productId,
+                salePrice: 0.0,
+                detailedItemPriceInfo: [
+                  {
+                    discounted: false,
+                    secondaryCurrencyTaxAmount: 0.0,
+                    amount: this.vision5Price,
+                    quantity: this.quantity,
+                    tax: 0.0,
+                    orderDiscountShare: 0.0,
+                    detailedUnitPrice: this.vision5Price,
+                    currencyCode: "EUR"
+                  }
+                ],
+                catRefId: "iphoneXsg256GB",
+                discountInfo: [],
+                shopperInput: {},
+                backOrderQuantity: 0,
+                listPrice: this.vision5Price,
+                status: "INITIAL"
+              }
+            ]
+          },
+          shippingAddress: {
+            lastName: this.lastName,
+            country: this.country,
+            city: this.city,
+            prefix: "",
+            address1: this.address1,
+            postalCode: this.postalCode,
+            selectedCountry: this.country,
+            firstName: this.firstName,
+            phoneNumber: this.phoneNumber,
+            faxNumber: "",
+            middleName: "",
+            state: this.state,
+            email: this.email
+          },
+          requestChannel: "agent",
+          dynamicPropertyShippingInstructions: "Test Instructions"
+        })
       })
         .then(response => {
           return response.json();
         })
         .then(data => {
-          if (data.orderId !== null && data.orderId !== undefined) {
-            // create the order
-            this.createOrderHelper(productToAdd, res);
-          } else {
-            res.status(200).send({
-              message: "No valid orderId found"
-            });
-          }
+          res.status(200).send({ message: data });
         })
         .catch(error => {
           console.log(error);
           res.status(200).send({
-            message: "Error retrieving your order"
+            message: "Error creating the order"
           });
         });
     } catch (error) {
       res.status(200).send({ message: "Cannot perform createOrder request" });
     }
-  }
-
-  // create order helper
-  createOrderHelper(productToAdd, res) {
-    // create order
-    fetch(process.env.OCCSURL + process.env.ENDPOINTCREATEORDER, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.token
-      },
-      body: JSON.stringify({
-        op: "createOrder",
-        profileId: "1380313",
-        shippingMethod: {
-          shippingTax: 0.0,
-          value: null,
-          cost: 0.0
-        },
-        shoppingCart: {
-          items: productToAdd
-        },
-        shippingAddress: {
-          lastName: "DAlessio",
-          country: "US",
-          city: "Miami",
-          prefix: "",
-          address1: "Main Street",
-          postalCode: "10101",
-          DEFAULT_POSTAL_CODE_PATTERN:
-            "^[0-9a-zA-Z]{1,}([ -][0-9a-zA-Z]{1,})?$",
-          selectedCountry: "US",
-          firstName: "Valerio",
-          phoneNumber: "973-974-1234",
-          faxNumber: "",
-          middleName: "",
-          state: "FL",
-          email: "valerio.dalessio@oracle.com",
-          selectedState: "FL",
-          state_ISOCode: "US-FL"
-        },
-        requestChannel: "agent",
-        dynamicPropertyShippingInstructions: "Test Instructions"
-      })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        res.status(200).send({ message: data });
-      })
-      .catch(error => {
-        console.log(error);
-        res.status(200).send({
-          message: "Error creating the order"
-        });
-      });
   }
 }
 
