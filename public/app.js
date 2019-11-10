@@ -69,12 +69,16 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
         // change banner graphic
         document.querySelector(".bannersContainer").style.backgroundImage =
           "url('businessmobiles.png')";
+        // chech for mobile screen layouts
+        switchMobile(x);
       } else {
         console.log(data.cusData);
         console.log(data.token);
         // change banner graphic
         document.querySelector(".bannersContainer").style.backgroundImage =
           "url('businessmobiles-logged.png')";
+        // chech for mobile screen layouts
+        switchMobile(x);
         // perform the getCurrentProfile API request
         loginUIMessage("Login completed successfully");
         $("#loginUiFeedback").show();
