@@ -302,7 +302,7 @@ document.querySelector("#addService").addEventListener("click", function(e) {
 
 document.querySelector("#removeService").addEventListener("click", function(e) {
   if (quantity > 1) {
-    var removeSimName = "col-12 simLayout" + quantity.toString();
+    var removeSimName = "col-lg-12 col-sm-12 simLayout" + quantity.toString();
     var removeCartSim = "col-12 simVision" + quantity.toString();
     var removeSpacer = "spacer" + quantity.toString();
     removeSim(removeSimName, removeCartSim, removeSpacer);
@@ -369,7 +369,7 @@ function addNewSimWithForm() {
   var parent = document.querySelector(".planOptions");
   // simLayout
   var simLayout = document.createElement("div");
-  simLayout.setAttribute("class", "col-12 simLayout" + quantity);
+  simLayout.setAttribute("class", "col-lg-12 col-sm-12 simLayout" + quantity);
   simLayout.setAttribute("style", "padding-bottom:20px;");
   simLayout.setAttribute("style", "background-color: #fafafa;");
   // row
@@ -378,11 +378,11 @@ function addNewSimWithForm() {
   simLayout.appendChild(rowOne);
   // simSelection
   var simSelection = document.createElement("div");
-  simSelection.setAttribute("class", "col-4 simSelection");
+  simSelection.setAttribute("class", "col-lg-4 col-sm-12 simSelection");
   rowOne.appendChild(simSelection);
   // simNumber
   var simNumber = document.createElement("div");
-  simNumber.setAttribute("class", "col-12 simNumber");
+  simNumber.setAttribute("class", "col-lg-12 col-sm-12 simNumber");
   simNumber.textContent = "SIM NUMBER " + quantity;
   simSelection.appendChild(simNumber);
   // hr
@@ -394,7 +394,7 @@ function addNewSimWithForm() {
   simSelection.appendChild(rowTwo);
   // div
   var newDivOne = document.createElement("div");
-  newDivOne.setAttribute("class", "col-2");
+  newDivOne.setAttribute("class", "col-lg-2 d-none d-lg-block");
   rowTwo.appendChild(newDivOne);
   // image
   var imageVision = document.createElement("img");
@@ -403,7 +403,7 @@ function addNewSimWithForm() {
   newDivOne.appendChild(imageVision);
   // newDivTwo
   var newDivTwo = document.createElement("div");
-  newDivTwo.setAttribute("class", "col-10");
+  newDivTwo.setAttribute("class", "col-lg-10 col-sm-6 simOperator");
   // here
   rowTwo.appendChild(newDivTwo);
   // select
@@ -430,7 +430,7 @@ function addNewSimWithForm() {
   select.appendChild(optionTwo);
   // customerData
   var customerData = document.createElement("div");
-  customerData.setAttribute("class", "col-8 customerData");
+  customerData.setAttribute("class", "col-lg-8 col-sm-12 customerData");
   rowOne.appendChild(customerData);
   // rowThree
   var rowThree = document.createElement("div");
@@ -531,7 +531,7 @@ function addNewSimWithForm() {
   // labelFive
   var labelFive = document.createElement("label");
   labelFive.setAttribute("for", "phoneNumber" + quantity);
-  labelFive.textContent = "SIM owner last name";
+  labelFive.textContent = "Phone number";
   formGroupFive.appendChild(labelFive);
   // inputFive
   var inputFive = document.createElement("input");
