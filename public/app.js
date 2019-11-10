@@ -581,3 +581,16 @@ document
       "#selectNewSimOperator"
     ).value;
   });
+
+function switchMobile(x) {
+  if (x.matches) {
+    document.querySelector(".bannersContainer").style.backgroundImage =
+      "url('visionMobileBanner.png')";
+  } else {
+    checkPreviousSession();
+  }
+}
+
+var x = window.matchMedia("(max-width: 414px)");
+switchMobile(x); // Call listener function at run time
+x.addListener(switchMobile); // Attach listener function on state changes
