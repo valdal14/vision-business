@@ -2,6 +2,22 @@ var quantity = 1;
 var monthlyFee = 15.0;
 var activationFee = 10.0;
 var totalFee = monthlyFee + activationFee;
+var resolution = window.matchMedia("(min-width: 375px) and (max-width: 414px)");
+switchMobile(resolution); // Call listener function at run time
+resolution.addListener(switchMobile); // Attach listener function on state changes
+
+/**
+ * Managed resolution changes
+ * @param {*} x
+ */
+function switchMobile(x) {
+  if (x.matches) {
+    document.querySelector(".bannersContainer").style.backgroundImage =
+      "url('visionMobileBanner.png')";
+  } else {
+    checkPreviousSession();
+  }
+}
 
 // Hide UI Elements
 $("#loginUiFeedback").hide();
@@ -70,7 +86,7 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
         document.querySelector(".bannersContainer").style.backgroundImage =
           "url('businessmobiles.png')";
         // chech for mobile screen layouts
-        switchMobile(x);
+        switchMobile(resolution);
       } else {
         console.log(data.cusData);
         console.log(data.token);
@@ -78,7 +94,7 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
         document.querySelector(".bannersContainer").style.backgroundImage =
           "url('businessmobiles-logged.png')";
         // chech for mobile screen layouts
-        switchMobile(x);
+        switchMobile(resolution);
         // perform the getCurrentProfile API request
         loginUIMessage("Login completed successfully");
         $("#loginUiFeedback").show();
@@ -585,16 +601,3 @@ document
       "#selectNewSimOperator"
     ).value;
   });
-
-function switchMobile(x) {
-  if (x.matches) {
-    document.querySelector(".bannersContainer").style.backgroundImage =
-      "url('visionMobileBanner.png')";
-  } else {
-    checkPreviousSession();
-  }
-}
-
-var x = window.matchMedia("(max-width: 414px)");
-switchMobile(x); // Call listener function at run time
-x.addListener(switchMobile); // Attach listener function on state changes
