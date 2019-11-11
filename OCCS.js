@@ -140,7 +140,6 @@ class OCCS {
     // to-do
     try {
       let quantity = req.body.quantity;
-      console.log(quantity);
       this.quantity = quantity;
       // create order
       fetch(process.env.OCCSURL + process.env.ENDPOINTCREATEORDER, {
