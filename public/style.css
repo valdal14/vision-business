@@ -221,11 +221,3 @@ img {
   padding-top: 50px;
   padding-bottom: 50px;
 }
-
-@media only screen and (min-width: 414px) and (max-width: 896px) {
-  .bannersContainer {
-    background-image: url("visionMobileBanner.png");
-    background-repeat: no-repeat;
-    min-height: 712px;
-  }
-}
