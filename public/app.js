@@ -45,11 +45,15 @@ function checkPreviousSession() {
     $(".bannerLogged").show();
     // enable add to cart button
     document.querySelector("#btnAddSimToCart").disabled = false;
+    // chech for mobile screen layouts
+    switchMobile(resolution);
   } else {
     $(".banner").show();
     // change banner graphic
     document.querySelector(".bannersContainer").style.backgroundImage =
       "url('businessmobiles.png')";
+    // chech for mobile screen layouts
+    switchMobile(resolution);
   }
 }
 
