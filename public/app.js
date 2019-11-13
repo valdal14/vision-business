@@ -2,7 +2,7 @@ var quantity = 1;
 var monthlyFee = 15.0;
 var activationFee = 10.0;
 var totalFee = monthlyFee + activationFee;
-var resolution = window.matchMedia("(min-width: 375px) and (max-width: 414px)");
+var resolution = window.matchMedia("(min-width: 375px) and (max-width: 896px)");
 switchMobile(resolution); // Call listener function at run time
 resolution.addListener(switchMobile); // Attach listener function on state changes
 
