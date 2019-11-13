@@ -52,8 +52,6 @@ function checkPreviousSession() {
     // change banner graphic
     document.querySelector(".bannersContainer").style.backgroundImage =
       "url('businessmobiles.png')";
-    // chech for mobile screen layouts
-    switchMobile(resolution);
   }
 }
 
