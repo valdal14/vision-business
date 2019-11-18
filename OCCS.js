@@ -7,8 +7,8 @@ class OCCS {
     this.token = null;
     // product info
     //this.orderId = null;
-    this.productId = "iPhoneX"; // vision5
-    this.catRefId = "iphoneXsg256GB"; // vision5 sku
+    this.productId = "VISION5"; // vision5
+    this.catRefId = "vision5"; // vision5 sku
     this.vision5Price = 999.0;
     this.quantity = 1;
     // customer data
@@ -186,7 +186,7 @@ class OCCS {
                     currencyCode: "EUR"
                   }
                 ],
-                catRefId: "iphoneXsg256GB",
+                catRefId: this.catRefId,
                 discountInfo: [],
                 shopperInput: {},
                 backOrderQuantity: 0,

@@ -3,21 +3,8 @@ var monthlyFee = 15.0;
 var activationFee = 10.0;
 var totalFee = monthlyFee + activationFee;
 var resolution = window.matchMedia("(min-width: 375px) and (max-width: 414px)");
-switchMobile(resolution); // Call listener function at run time
-resolution.addListener(switchMobile); // Attach listener function on state changes
-
-/**
- * Managed resolution changes
- * @param {*} x
- */
-function switchMobile(x) {
-  if (x.matches) {
-    document.querySelector(".bannersContainer").style.backgroundImage =
-      "url('visionMobileBanner.png')";
-  } else {
-    checkPreviousSession();
-  }
-}
+checkBrowserResolution(resolution); // Call listener function at run time
+resolution.addListener(checkBrowserResolution); // Attach listener function on state changes
 
 // Hide UI Elements
 $("#loginUiFeedback").hide();
@@ -27,6 +14,26 @@ $(".bannerLoading").hide();
 // disable add to cart button
 document.querySelector("#btnAddSimToCart").disabled = true;
 
+/**
+ * Check current browser resolution
+ */
+function checkBrowserResolution(res) {
+  // bannersContainer
+  if (res.matches) {
+    document.querySelector(".bannersContainer").style.backgroundImage =
+      "url('visionMobileBanner.png')";
+  } else if (localStorage.getItem("VISION5")) {
+    document.querySelector(".bannersContainer").style.backgroundImage =
+      "url('businessmobiles-logged.png')";
+  } else {
+    document.querySelector(".bannersContainer").style.backgroundImage =
+      "url('businessmobiles.png')";
+  }
+}
+
+/**
+ * Check whether there was a previous session opened
+ */
 function checkPreviousSession() {
   if (
     localStorage.getItem("VISION5") !== null &&
@@ -36,22 +43,18 @@ function checkPreviousSession() {
     $("#modalbutton").hide();
     // parse the data
     var data = JSON.parse(localStorage.getItem("VISION5"));
-    // change banner graphic
-    document.querySelector(".bannersContainer").style.backgroundImage =
-      "url('businessmobiles-logged.png')";
     // add customer data to the UI
     addLoggedUserToSIM(data);
     // show logged banner
     $(".bannerLogged").show();
     // enable add to cart button
     document.querySelector("#btnAddSimToCart").disabled = false;
-    // chech for mobile screen layouts
-    switchMobile(resolution);
+    // check resolution and apply banner
+    checkBrowserResolution(resolution);
   } else {
     $(".banner").show();
-    // change banner graphic
-    document.querySelector(".bannersContainer").style.backgroundImage =
-      "url('businessmobiles.png')";
+    // check resolution and apply banner
+    checkBrowserResolution(resolution);
   }
 }
 
@@ -84,19 +87,11 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
       if (data.token === undefined && data.token === null) {
         loginUIMessage("Error: Impossible to find valid data, try again!");
         $("#loginUiFeedback").show();
-        // change banner graphic
-        document.querySelector(".bannersContainer").style.backgroundImage =
-          "url('businessmobiles.png')";
-        // chech for mobile screen layouts
-        switchMobile(resolution);
+        // check resolution and apply banner
+        checkBrowserResolution(resolution);
       } else {
         console.log(data.cusData);
         console.log(data.token);
-        // change banner graphic
-        document.querySelector(".bannersContainer").style.backgroundImage =
-          "url('businessmobiles-logged.png')";
-        // chech for mobile screen layouts
-        switchMobile(resolution);
         // perform the getCurrentProfile API request
         loginUIMessage("Login completed successfully");
         $("#loginUiFeedback").show();
@@ -110,12 +105,15 @@ document.querySelector("#sendLogin").addEventListener("click", function(e) {
         $(".bannerLogged").show();
         $(".banner").hide();
         $(".bannerLoading").hide();
+        // check resolution and apply banner
+        checkBrowserResolution(resolution);
       }
     })
     .catch(function(error) {
       console.log(error);
       loginUIMessage("Error: " + error);
       $("#loginUiFeedback").show();
+      checkBrowserResolution(resolution);
     });
 });
 
